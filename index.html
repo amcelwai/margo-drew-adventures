@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>MARGO & DREW's ADVENTURES</title>
+        <script>
+            const countries = ['Germany', 'Italy', 'Spain', 'France', 'Portugal', 'Hungary', 'Netherlands', 'Norway', 'Sweden', 'Finland', 'Estonia', 'Belgium', 'Lithuania', 'Bulgaria', 'Austria', 'Slovenia', 'Switzerland', 'Croatia', 'Moldova', 'Russia', 'Georgia', 'Turkiye', 'Morocco', 'Montenegro', 'Greece', 'Monaco', 'Romania', 'Ireland', 'Malta'];
+            
+            window.onload = () => {
+                document.getElementById('country-dropdown').innerHTML = '<option value="">--Choose a Destination--</option>' + countries.map(c => `<option value="${c.toLowerCase()}">${c}</option>`).join('');
+                document.getElementById('travel-types').innerHTML = ['Bus', 'Train', 'Ferry', 'Car', 'Boat', 'Plane', 'Cruise'].map(t => `<input type="checkbox" id="${t.toLowerCase()}"><label for="${t.toLowerCase()}">${t}</label>`).join(' ');
+                
+                // Add functionality
+                document.querySelector('.btn').onclick = () => {
+                    const country = document.getElementById('country-dropdown').value;
+                    const travel = [...document.querySelectorAll('#travel-types input:checked')].map(i => i.id);
+                    
+                    if (!country) return alert('Please select a country!');
+                    if (!travel.length) return alert('Please select travel types!');
+                    
+                    alert(`Great! You want to visit ${country} using: ${travel.join(', ')}`);
+                };
+            };
+        </script>
+        <style>
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            body { font-family: Arial, sans-serif; line-height: 1.6; }
+            .container { max-width: 1200px; margin: 0 auto; padding: 20px; text-align: center; }
+            .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 60px 20px; }
+            .form-group { margin: 15px 0; }
+            .dropdown { padding: 12px; font-size: 16px; border: 2px solid #ddd; border-radius: 8px; margin: 10px; }
+            .btn { background: #667eea; color: white; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; }
+            .btn:hover { background: #5a6fd8; }
+        </style>
+    </head>
+    <body>
+        <section class="hero">
+            <div class="container">
+                <h1>MARGO & DREW's ADVENTURES</h1>
+                <h2>We've traveled the world for the past 4 years in search of the world's best foods!</h2>
+                <p>Join us on our culinary journey across 29 countries</p>
+            </div>
+        </section>
+        
+        <section class="container">
+            <h3>Plan Your Adventure</h3>
+            
+            <div class="form-group">
+                <label for="country-dropdown">Select a country we've visited</label>
+                <select id="country-dropdown" class="dropdown" name="visited-countries"></select>
+            </div>
+            
+            <div class="form-group">
+                <h4>Types of Travel</h4>
+                <div id="travel-types"></div>
+            </div>
+            
+            <button class="btn">Get Started</button>
+        </section>
+    </body>
+</html>
